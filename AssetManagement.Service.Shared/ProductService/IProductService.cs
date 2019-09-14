@@ -16,7 +16,6 @@ namespace AssetManagement.Service.Shared.ProductService
         void UpdateProduct(ProductDto product);
 
         void DeleteProduct(long id);
-
-        void SaveCategory();
+        ProductDto GetProductByName(string productName);
     }
 }

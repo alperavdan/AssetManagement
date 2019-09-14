@@ -17,7 +17,7 @@ namespace AssetManagement.Service.AutoMapper
         protected AutoMapperProfileConfiguration(string profileName)
         : base(profileName)
         {
-            CreateMap<ProductDto, Product>();
+            CreateMap<ProductDto, Model.Product>().ReverseMap() ;
             CreateMap<CategoryDto, Model.Category>().ReverseMap();
         }
     }

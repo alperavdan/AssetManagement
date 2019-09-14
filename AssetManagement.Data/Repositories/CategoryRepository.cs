@@ -8,9 +8,11 @@ using System.Text;
 
 namespace AssetManagement.Data.Repositories
 {
-    public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository
+    public class CategoryRepository : RepositoryBase<Category>
     {
         public CategoryRepository(ApplicationDbContext dbContext): base(dbContext) { }
+
+    
 
         public Category GetCategoryByName(string categoryName)
 

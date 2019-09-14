@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AssetManagement.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
 namespace AssetManagement.Data.Infrastructure
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T>  where T : BaseEntity
 
     {
 

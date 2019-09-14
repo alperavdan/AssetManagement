@@ -10,6 +10,7 @@ namespace AssetManagement.Service.Shared.CategoryService
     {
 
         CategoryDto GetCategory(long id);
+        CategoryDto GetCategoryByName();
 
         IEnumerable<CategoryDto> GetCategories();
 
@@ -19,7 +20,7 @@ namespace AssetManagement.Service.Shared.CategoryService
 
         void DeleteCategory(long id);
 
-        void SaveCategory();
+
 
     }
 }

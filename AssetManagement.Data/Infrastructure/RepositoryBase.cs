@@ -8,11 +8,12 @@ using System.Text;
 
 namespace AssetManagement.Data.Infrastructure
 {
-    public abstract class RepositoryBase<T> where T : BaseEntity
+    public  class RepositoryBase<T>:IRepository<T> where T : BaseEntity
     {
         #region Properties
 
-        private ApplicationDbContext dataContext;
+        private ApplicationDbContext _dataContext;
+        private readonly IUnitOfWork _unitOfWork;
 
         private readonly DbSet<T> dbSet;
 
@@ -20,19 +21,20 @@ namespace AssetManagement.Data.Infrastructure
 
         {
 
-            get { return dataContext; }
+            get { return _dataContext; }
 
         }
 
         #endregion
 
-        protected RepositoryBase(ApplicationDbContext dbContext)
+        public RepositoryBase(ApplicationDbContext dbContext)
 
         {
 
-            dataContext = dbContext;
+            _dataContext = dbContext;
 
             dbSet = DbContext.Set<T>();
+            _unitOfWork = new UnitOfWork(dbContext);
 
         }
 
@@ -43,6 +45,7 @@ namespace AssetManagement.Data.Infrastructure
         {
 
             dbSet.Add(entity);
+            _unitOfWork.Commit();
 
         }
 
@@ -52,8 +55,8 @@ namespace AssetManagement.Data.Infrastructure
 
             dbSet.Attach(entity);
 
-            dataContext.Entry(entity).State = EntityState.Modified;
-
+            _dataContext.Entry(entity).State = EntityState.Modified;
+            _unitOfWork.Commit();
         }
 
         public virtual void Delete(T entity)
@@ -61,7 +64,7 @@ namespace AssetManagement.Data.Infrastructure
         {
 
             dbSet.Remove(entity);
-
+            _unitOfWork.Commit();
         }
 
         public virtual void Delete(Expression<Func<T, bool>> where)
@@ -71,9 +74,9 @@ namespace AssetManagement.Data.Infrastructure
             IEnumerable<T> objects = dbSet.Where<T>(where).AsEnumerable();
 
             foreach (T obj in objects)
-
                 dbSet.Remove(obj);
 
+            _unitOfWork.Commit();
         }
 
         public virtual T GetById(long id, params string[] navigations)

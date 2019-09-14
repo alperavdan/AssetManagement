@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AssetManagement.Service.Shared.CategoryService;
+using AssetManagement.Service.Shared.ProductService;
+using Log4Net_Logging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssetManagement.Api.Controllers
@@ -13,16 +16,23 @@ namespace AssetManagement.Api.Controllers
     {
 
         private readonly ICategoryService _categoryService;
-        public ValuesController(ICategoryService categoryService)
+        private readonly IProductService _productService;
+
+        public ValuesController(ICategoryService categoryService,IProductService productService)
         {
             _categoryService = categoryService;
+            _productService = productService;
+            LogFourNet.SetUp(Assembly.GetEntryAssembly(), "log4net.config");
         }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
             _categoryService.CreateCategory(new Service.Shared.CategoryService.Dto.CategoryDto { Name = "aaa", AddedDate = DateTime.Now, AddedBy = "alper" });
-            _categoryService.SaveCategory();
+            _categoryService.GetCategoryByName();
+            _productService.CreateProduct(new Service.Shared.ProductService.Dto.ProductDto { Title = "avdan",CategoryId=1,Description="aaaasdaasd" });
+            //_categoryService.SaveCategory();
+            LogFourNet.Info(this,"alper");
             return new string[] { "value1", "value2" };
         }
 
@@ -50,5 +60,7 @@ namespace AssetManagement.Api.Controllers
         public void Delete(int id)
         {
         }
+
+
     }
 }
