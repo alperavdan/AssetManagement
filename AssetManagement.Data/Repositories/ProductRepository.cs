@@ -14,19 +14,19 @@ namespace AssetManagement.Data.Repositories
     {
 
         private DbContext _dbContext;
-        private IUnitOfWork _uow;
+      
 
-        public ProductRepository(ApplicationDbContext dbContext,IUnitOfWork uow)
+        public ProductRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _uow = uow;
+
         }
 
       
         public void Add(Product entity)
         {
             _dbContext.Set<Product>().Add(entity);
-            _uow.Commit();
+            //_uow.Commit();
             
         }
 
