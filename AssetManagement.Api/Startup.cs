@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AssetManagement.Data;
 using AssetManagement.Data.Infrastructure;
+using AssetManagement.Data.Repositories;
 using AssetManagement.Data.Repositories.Interface;
 using AssetManagement.Service.AutoMapper;
 using AssetManagement.Service.Category;
@@ -44,7 +45,7 @@ namespace AssetManagement.Api
             services.AddSingleton(mapper);
             services.AddScoped<IUnitOfWork,UnitOfWork>();
 
-            services.AddTransient(typeof(IRepository<>),typeof(ICategoryRepository));
+            services.AddTransient<ICategoryRepository,CategoryRepository>();
             services.AddTransient<ICategoryService,CategoryService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
