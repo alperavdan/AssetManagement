@@ -13,4 +13,8 @@
     <ProjectReference Include="..\AssetManagement.Service.Shared\AssetManagement.Service.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

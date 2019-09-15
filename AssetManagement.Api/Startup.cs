@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AssetManagement.Data;
 using AssetManagement.Data.Infrastructure;
@@ -11,6 +13,7 @@ using AssetManagement.Service.Category;
 using AssetManagement.Service.Product;
 using AssetManagement.Service.Shared.CategoryService;
 using AssetManagement.Service.Shared.ProductService;
+using Log4Net_Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -20,6 +23,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace AssetManagement.Api
 {
@@ -40,6 +45,10 @@ namespace AssetManagement.Api
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("AssetManagementV1", new OpenApiInfo { Title = "Asset Management", Version = "v1" });
+            });
             var config = new AutoMapper.MapperConfiguration(cfg=> {
                 cfg.AddProfile(new AutoMapperProfileConfiguration());
             });
@@ -52,6 +61,7 @@ namespace AssetManagement.Api
          
             services.AddTransient<ICategoryService,CategoryService>();
             services.AddTransient<IProductService, ProductService>();
+    
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -67,8 +77,30 @@ namespace AssetManagement.Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-           
             app.UseHttpsRedirection();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c=>{
+                
+                c.SwaggerEndpoint("/swagger/AssetManagementV1/swagger.json", "Asset Management V1");
+                c.RoutePrefix = string.Empty;
+            });
+
+
+            //var all =
+            //      Assembly
+            //         .GetEntryAssembly()
+            //         .GetReferencedAssemblies()
+            //         .Select(Assembly.Load)
+            //         .SelectMany(x => x.DefinedTypes)
+            //         .Where(type => typeof(ControllerBase).GetTypeInfo().IsAssignableFrom(type.AsType())).Select(x=>x.Assembly).ToList();
+
+            //foreach (var item in all)
+            //{
+            //    LogFourNet.SetUp(item, "log4net.config");
+            //}
+            
+
             app.UseMvc();
         }
     }
