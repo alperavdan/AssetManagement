@@ -32,7 +32,7 @@ namespace AssetManagement.Api.Controllers
             _categoryService.GetCategoryByName();
             _productService.CreateProduct(new Service.Shared.ProductService.Dto.ProductDto { Title = "avdan",CategoryId=1,Description="aaaasdaasd" });
             //_categoryService.SaveCategory();
-            LogFourNet.Info(this,"ramazan");
+           
             return new string[] { "value1", "value2" };
         }
 

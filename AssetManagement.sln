@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManagement.Model", "AssetManagement.Model\AssetManagement.Model.csproj", "{564BA355-4F9F-4A25-A2CC-501995131FF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetManagement.Model", "AssetManagement.Model\AssetManagement.Model.csproj", "{564BA355-4F9F-4A25-A2CC-501995131FF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManagement.Data", "AssetManagement.Data\AssetManagement.Data.csproj", "{7F2DC427-3B62-4B5E-8D7A-8A8EEA3D9777}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetManagement.Data", "AssetManagement.Data\AssetManagement.Data.csproj", "{7F2DC427-3B62-4B5E-8D7A-8A8EEA3D9777}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManagement.Service", "AssetManagement.Service\AssetManagement.Service.csproj", "{849DE624-377E-4A46-813C-BB043CA5711F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetManagement.Service", "AssetManagement.Service\AssetManagement.Service.csproj", "{849DE624-377E-4A46-813C-BB043CA5711F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManagement.Service.Shared", "AssetManagement.Service.Shared\AssetManagement.Service.Shared.csproj", "{38D7F4F1-2B75-4FF1-A46F-69DEA9E5475C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetManagement.Service.Shared", "AssetManagement.Service.Shared\AssetManagement.Service.Shared.csproj", "{38D7F4F1-2B75-4FF1-A46F-69DEA9E5475C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManagement.Api", "AssetManagement.Api\AssetManagement.Api.csproj", "{9E20EB4E-B3E4-46CC-A2CB-A2382DC54834}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetManagement.Api", "AssetManagement.Api\AssetManagement.Api.csproj", "{9E20EB4E-B3E4-46CC-A2CB-A2382DC54834}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

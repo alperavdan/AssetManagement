@@ -45,6 +45,14 @@ namespace AssetManagement.Api
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("AssetManagementV1", new OpenApiInfo { Title = "Asset Management", Version = "v1" });
@@ -77,30 +85,32 @@ namespace AssetManagement.Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c=>{
                 
                 c.SwaggerEndpoint("/swagger/AssetManagementV1/swagger.json", "Asset Management V1");
-                c.RoutePrefix = string.Empty;
+                //c.RoutePrefix = String.Empty;
             });
 
 
-            //var all =
-            //      Assembly
-            //         .GetEntryAssembly()
-            //         .GetReferencedAssemblies()
-            //         .Select(Assembly.Load)
-            //         .SelectMany(x => x.DefinedTypes)
-            //         .Where(type => typeof(ControllerBase).GetTypeInfo().IsAssignableFrom(type.AsType())).Select(x=>x.Assembly).ToList();
+            var all =
+                  Assembly
+                     .GetEntryAssembly()
+                     .GetReferencedAssemblies()
+                     .Select(Assembly.Load)
+                     .SelectMany(x => x.DefinedTypes)
+                     .Where(type => typeof(ControllerBase).GetTypeInfo().IsAssignableFrom(type.AsType())).Select(x => x.Assembly).ToList();
 
-            //foreach (var item in all)
-            //{
-            //    LogFourNet.SetUp(item, "log4net.config");
-            //}
-            
+            foreach (var item in all)
+            {
+                LogFourNet.SetUp(item, "log4net.config");
+            }
 
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

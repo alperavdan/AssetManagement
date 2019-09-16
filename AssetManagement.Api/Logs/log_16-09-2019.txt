@@ -1,0 +1,2 @@
+2019-09-16 17:02:07,285 [1] INFO Log4Net_Logging.LogFourNet - Log4net is configured for Startup
+2019-09-16 17:05:50,025 [1] INFO Log4Net_Logging.LogFourNet - Log4net is configured for Startup
